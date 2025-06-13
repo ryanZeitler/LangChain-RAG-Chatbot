@@ -54,7 +54,12 @@ for div in soup.find_all('div', class_ = 'region region-content'):
 loader= WebBaseLoader(web_paths=(doc_links),header_template=headers)
 docs= loader.load()
 
-print(docs)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+chunks = text_splitter.split_documents(docs)
+
+print(chunks)
+
+
 
 
 
