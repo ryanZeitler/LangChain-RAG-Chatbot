@@ -114,19 +114,19 @@ def url_scrape(url):
     return doc_links
 
 
- def doc_loader(doc_links, user_agent):
-    headers = {"User-Agent": user_agent}
-    loader = WebBaseLoader(web_paths=(doc_links),header_template=headers)
-    docs = loader.load()
+def doc_loader(doc_links, user_agent):
+  headers = {"User-Agent": user_agent}
+  loader = WebBaseLoader(web_paths=(doc_links),header_template=headers)
+  docs = loader.load()
     
-    for doc in docs:
-        # Replace multiple whitespace chars with a single space and strip leading/trailing spaces
-        doc.page_content = ' '.join(doc.page_content.split())
+  for doc in docs:
+      # Replace multiple whitespace chars with a single space and strip leading/trailing spaces
+      doc.page_content = ' '.join(doc.page_content.split())
         
-    for doc in docs:
-        doc.metadata = {"source": doc.metadata.get("source", "")}  #add source url to metadata for each document, removes the rest of metadata to keep size smaller
+  for doc in docs:
+      doc.metadata = {"source": doc.metadata.get("source", "")}  #add source url to metadata for each document, removes the rest of metadata to keep size smaller
   
-    return docs
+  return docs
 
 
 def split_docs(docs, chunk_size=1000, chunk_overlap=200):
